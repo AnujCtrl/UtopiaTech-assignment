@@ -1,0 +1,39 @@
+<table>
+  <tr>
+    <th>Panel Name</th>
+    <th>Mac Id</th>
+    <th>Lat</th>
+    <th>Long</th>
+    <th>Location</th>
+  </tr>
+  <tr *ngFor="let panel of panelList">
+    <td (click)="openSidebar(panel)">{{ panel.panel_name }}</td>
+    <td>{{ panel.mac_id }}</td>
+    <td>{{ panel.Lat }}</td>
+    <td>{{ panel.Lng }}</td>
+    <td><img src="../assets/location.png" (click)="openMapPanel(panel)" alt="Location Icon"  width="50" height="50"></td>
+  </tr>
+</table>
+
+<div class="sidebar" *ngIf="selectedPanel">
+  <h2>Panel Location</h2>
+  <p><strong>Panel Name:</strong> {{ selectedPanel.panel_name }}</p>
+  <p><strong>Mac Id:</strong> {{ selectedPanel.mac_id }}</p>
+  <p><strong>Lat:</strong> {{ selectedPanel.Lat }}</p>
+  <p><strong>Long:</strong> {{ selectedPanel.Lng }}</p>
+  <div style="height: 400px;">  
+    <app-map [lat]="selectedPanel.Lat" [lng]="selectedPanel.Lng"></app-map>
+  </div> 
+   <button (click)="closeSidebar()">Close</button>
+</div>
+
+<div class="sidebar" *ngIf="selectedPanelStatus">
+  <h2>Panel Location</h2>
+    <p><strong>Panel Name:</strong> {{ selectedPanelStatus.panel_name }}</p>
+    <p><strong>Voltage Status</strong>{{ selectedPanelStatus.r_load_status }}</p>
+    <p><strong>MCB Status</strong>{{ selectedPanelStatus.r_mcb_status }}</p>
+    <p><strong>Load Status </strong>{{ selectedPanelStatus.r_pf_status }}</p>
+    <p><strong>PF Status</strong>{{ selectedPanelStatus.r_volt_status }}</p>
+
+  <button (click)="closeSidebar()">Close</button>
+</div>
